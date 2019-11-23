@@ -1,0 +1,19 @@
+spring:
+  datasource:
+#   메모리 모드로 test
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      # create : 내가 가지고 있는 entity를 drop하고 애플리케이션을 실행시킴
+      # create-drop : 종료시점에 내가 가지고 있는 entity를 모두 drop
+    show-sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.Type: trace
