@@ -1,0 +1,6 @@
+- 변경 감지와 병합(merge)
+
+- transactional
+
+- 병합보다는 변경감지를 최대로 활용하자
+- setter없이 entity안에서 바로 추적할 수 있는 method를 만드는 것이 좋다.
