@@ -1,7 +1,6 @@
 # jpashop
-spring boot
+## spring boot
 
-< 라이브러리 >
   - Spring boot
   - Tymeleaf
   - JPA
