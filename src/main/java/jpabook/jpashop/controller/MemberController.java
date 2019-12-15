@@ -40,8 +40,7 @@ public class MemberController {
         member.setAddress(address);
 
         memberService.join(member);
-
-        // 재로딩하면 안 좋기 때문에 redirect하면 된다.
+        // 재로딩하면 안 좋기 때문에 redirect하면 된다.t
         return "redirect:/";
     }
 
