@@ -6,6 +6,9 @@ spring:
     driver-class-name: org.h2.Driver
     properties:
       hibernate.format_sql: true
+  jpa:
+    hibernate:
+      ddl-auto: create
 
 logging:
   level:
