@@ -102,4 +102,15 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithItem() {
+        // distinct가 있으면 select로 가져온 것을 중복된 값을 제거해주고 반환해준다.
+        return em.createQuery(
+                "select distinct o from Order o " +
+                " join fetch o.member m" +
+                " join fetch o.delivery d" +
+                " join fetch o.orderItems oi" +
+                " join fetch oi.item i", Order.class)
+                .getResultList();
+        // join fetch가 있으면 paging이 안된다.
+    }
 }

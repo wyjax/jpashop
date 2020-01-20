@@ -22,18 +22,20 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    // JPQL select o From order o;
+    /*
+        JPQL select o From order o;
 
-    // EAGER를 쓴다면 MEMBER를 조회한다는 뜻
-    // EAGER 즉시로딩, LAZY 지연로딩
-    // ManyToOne은 기본이 EAGER
+         EAGER를 쓴다면 MEMBER를 조회한다는 뜻
+         EAGER 즉시로딩, LAZY 지연로딩
+         ManyToOne은 기본이 EAGER
+    */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-    // cascade = CascadeType.ALL
+    /*     cascade = CascadeType.AL
 
-    // OneToMany는 기본이 LAZY이다
-    // persist하면 cascade가 persist를 전파한다.
+         OneToMany는 기본이 LAZY이다
+         persist하면 cascade가 persist를 전파한다.*/
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
@@ -78,6 +80,7 @@ public class Order {
         return order;
     }
     //== 비즈니스 로직 ==//
+
     /**
      * 주문 취소
      */
@@ -91,6 +94,7 @@ public class Order {
         }
     }
     //== 조회 로직 ==//
+
     /**
      * 전체 주문 가격 조회
      */
