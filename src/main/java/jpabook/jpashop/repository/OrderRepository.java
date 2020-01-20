@@ -66,8 +66,7 @@ public class OrderRepository {
             if (isFirstCondition) {
                 jpql += " where ";
                 isFirstCondition = false;
-            }
-            else
+            } else
                 jpql += " and ";
             jpql += " o.status = :status";
         }
@@ -76,8 +75,7 @@ public class OrderRepository {
             if (isFirstCondition) {
                 jpql += " where ";
                 isFirstCondition = false;
-            }
-            else
+            } else
                 jpql += " and ";
             jpql += " o.name like :name";
         }
@@ -95,6 +93,7 @@ public class OrderRepository {
     }
 
     public List<Order> findAllWithMemberDelivery() {
+        // member, delivery 는 toOne 관계라서 페이징이 가능하다.
         return em.createQuery(
                 "select o from Order o" +
                         " join fetch o.member m" +
@@ -102,15 +101,28 @@ public class OrderRepository {
         ).getResultList();
     }
 
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        // member, delivery 는 toOne 관계라서 페이징이 가능하다.
+        return em.createQuery(
+                "select o from Order o", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+
     public List<Order> findAllWithItem() {
         // distinct가 있으면 select로 가져온 것을 중복된 값을 제거해주고 반환해준다.
         return em.createQuery(
                 "select distinct o from Order o " +
-                " join fetch o.member m" +
-                " join fetch o.delivery d" +
-                " join fetch o.orderItems oi" +
-                " join fetch oi.item i", Order.class)
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
                 .getResultList();
-        // join fetch가 있으면 paging이 안된다.
+        /*
+            join fetch가 있으면 paging이 안된다.
+            2개 이상의 컬렉션에서는 패치 조인을 사용하면 안된다.
+            - toOne 관계에서는 계속 패치 조인을 걸어도 된다.
+         */
     }
 }

@@ -11,6 +11,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        default_batch_fetch_size: 500 # 웬만하면 이 옵션을 키는 것이 좋다 + 글로벌한 방법
+        # 사이즈는 100 ~ 1000으로 하는 것이 좋다
 
 logging:
   level:
