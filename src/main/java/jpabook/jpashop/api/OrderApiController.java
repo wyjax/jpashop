@@ -77,6 +77,11 @@ public class OrderApiController {
     }
 
 
+    @GetMapping("/api/v5/orders")
+    public List<OrderQueryDto> orderV5() {
+        return orderQueryRepository.findAllByDto_optimization();
+    }
+
     // 엔티티를 노출하면 안된다.
     @Data
     static class OrderDto {
