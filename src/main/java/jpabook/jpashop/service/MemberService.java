@@ -63,18 +63,18 @@ public class MemberService {
 
     // 회원 한 명 조회
     public Member findMember(Long memberId) {
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).get();
     }
 
     public Member findOne(Long memberId) {
-        return memberRepository.findOne(memberId);
+        return memberRepository.findById(memberId).get();
     }
 
     // class에서 transactional을 readOnly로 했기 때문에 다시 써준다
     @Transactional
     public void update(Long id, String name) {
         // member는 영속상태이다
-        Member member = memberRepository.findOne(id);
+        Member member = memberRepository.findById(id).get();
         member.setName(name);
 
         // 트랜잭션이 끝나는 시점에 jpa가 flush하고 commit한다.
